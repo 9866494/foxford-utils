@@ -11,7 +11,7 @@ sript_path = os.path.dirname(os.path.realpath(__file__))
 
 @route('/ical')
 def index():
-    url = 'https://foxford.ru/api/calendar?date_from=2022-08-29&date_to=2022-12-31&token=f58b27c809e5e45f91b78871cf51da0799899a0e&user_id=8917764'
+    url = 'https://foxford.ru/api/calendar?date_from=2022-08-29&date_to=2023-09-01&token=f58b27c809e5e45f91b78871cf51da0799899a0e&user_id=8917764'
     response = urlopen(url)
     data = response.read()
 
