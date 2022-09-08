@@ -1,0 +1,10 @@
+BEGIN:VEVENT
+DTSTART:{{dtstart}}
+DTEND:{{dtend}}
+DTSTAMP:{{dtstamp}}
+UID:{{uid}}
+RECURRENCE-ID:{{dtstart}}
+SUMMARY:{{summary}}
+DESCRIPTION:{{description}}
+LOCATION:{{location}}
+END:VEVENT

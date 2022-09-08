@@ -18,7 +18,10 @@ lib/
 lib64/
 parts/
 sdist/
-var/
+var/*
+!var/ics/
+var/ics/*
+!var/ics/.gitkeep
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
