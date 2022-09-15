@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  app:
+    image: awful/foxford-utils
+    build:
+      context: ./
+      dockerfile: ./deploy/docker/Dockerfile
+    command: python run.py
+    ports:
+      - "8080:8080"

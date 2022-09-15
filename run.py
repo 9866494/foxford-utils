@@ -9,9 +9,17 @@ from pathlib import Path
 
 sript_path = os.path.dirname(os.path.realpath(__file__))
 
-@route('/ical')
-def index():
-    url = 'https://foxford.ru/api/calendar?date_from=2022-08-29&date_to=2023-09-01&token=f58b27c809e5e45f91b78871cf51da0799899a0e&user_id=8917764'
+@route('/')
+def utils():
+    return template('utils/index')
+
+@route('/ical/<user_id>/<token>')
+def ical(user_id, token):
+    year = 2022
+    date_from = '{0}-09-01'.format(year)
+    date_to = '{0}-08-31'.format(int(year) +1)
+    
+    url = 'https://foxford.ru/api/calendar?date_from={0}&date_to={1}&token={2}&user_id={3}'.format(date_from,date_to, token, user_id)
     response = urlopen(url)
     data = response.read()
 
@@ -50,7 +58,7 @@ def index():
 
             location = 'https://foxford.ru{0}'.format(course_lesson['url'])
 
-            vevent = template('vevent', dtstart=dtstart, dtend=dtend,
+            vevent = template('isc/vevent', dtstart=dtstart, dtend=dtend,
                               dtstamp=dtstamp, uid=uid, description=description, summary=summary, location=location)
 
             vevents.append(vevent)
@@ -73,14 +81,14 @@ def index():
 
                     home_work_uid = '{0}@{1}'.format(user_id, home_work_date)
 
-                    vevent = template('vevent', dtstart=home_work_dtstart, dtend=home_work_dtend,
+                    vevent = template('isc/vevent', dtstart=home_work_dtstart, dtend=home_work_dtend,
                                     dtstamp=home_work_dtstamp, uid=home_work_uid, description=home_work_description, summary=home_work_summary, location=home_work_location)
 
                     vevents.append(vevent)
 
             prior_date = ends_at
 
-        result = template('vevents', vevents=vevents)
+        result = template('isc/vevents', vevents=vevents)
 
         file = open(ics_file_path, 'w')
         file.write(result)
